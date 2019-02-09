@@ -1,0 +1,114 @@
+
+/*
+ * Implementar un almacén de enteros mediante una tabla de huecos
+ * se supone que no puede contener el valor 0 ya que indica posiciones libre.
+ */
+public class Almacen1 {
+
+	static private final int LIBRE = 0;
+	// Array con los valores almacenados
+	private int tvalores[];
+	private int valoresAlmacenados = 0;
+	
+	// Constructores sin parámetros creo una tabla de 10 elementos
+	public Almacen1(){
+		this(10);  // Llamo al constructor con parámetros
+	}
+
+	// Constructor donde se fija tamaño máximo del Almacén
+	public Almacen1(int tamaño){
+		tvalores = new int [tamaño];
+		init();
+	}
+	
+	// Pone todas las posiciones a LIBRES
+	public void init (){
+		for (int i = 0; i < tvalores.length; i++) {
+			tvalores[i] = Almacen1.LIBRE;
+		}
+		valoresAlmacenados = 0;
+	}
+	
+	// Muestra una cadena con los valores de la tabla - OK
+	public String toString (){
+		String x= "";
+		for (int i=0; i<tvalores.length; i++) {
+			x = x + tvalores[i];
+		}
+		return x;
+	}
+	
+	// Devuelve el números de posiciones libres -OK
+	public int numPosicionesLibres(){
+		int libre=0;
+		for (int i=0; i<tvalores.length; i++) {
+			if(tvalores[i]==0) {
+				libre++;
+			}
+		}
+		return libre;
+	}
+	
+	// Devuelve el número de posiones ocupadas - OK
+	public int numPosicionesOcupadas(){
+		int ocupado=0;
+		for (int i=0; i<tvalores.length; i++) {
+			if(tvalores[i]!=0) {
+				ocupado++;
+			}
+		}
+		return ocupado;
+	}
+	
+	// Devuelve verdadero o falso si está almacenado el valor en la tabla - OK
+	public boolean estaValor ( int num){
+		boolean result=false;
+		for (int i=0; i<tvalores.length; i++) {
+			if(num == tvalores[i]) {
+				result = true;
+			}else {
+				result = false;
+			}
+		}
+	return result;
+	}
+	
+	// Almacena el valor el la tabla, devuelve false sin no puede almacenarlo - OK
+	public boolean ponValor (int num){
+		boolean result = false;
+		for (int i=0; i<tvalores.length; i++) {
+			if (tvalores[i] == 0) {
+				tvalores[i] = num;
+				result = true;
+				break;
+			}
+		}
+	return result;
+	}
+	
+	// Elimina el elemento de la tabla, si no esta devuelve false - OK
+	public boolean sacarValor (int num){
+		boolean result = false;
+		for (int i=0; i<tvalores.length; i++) {
+			if (tvalores[i] == num) {
+				tvalores[i] = 0;
+				result = true;
+			}
+		}
+	return result;
+	}
+      // Indica si el almacén esta lleno
+	public boolean estaLleno (){
+		boolean result = false;
+		for (int i=0; i<tvalores.length; i++) {
+			if(tvalores[i] == 0) {
+				result = false;
+				break;
+			}else {
+				result = true;
+			}
+		}
+	return result;
+	}
+	
+}
